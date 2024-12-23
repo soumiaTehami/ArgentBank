@@ -1,0 +1,44 @@
+.features {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    flex-wrap: wrap; /* Permet aux items de passer à la ligne si nécessaire */
+  
+    &__item {
+      text-align: center;
+      max-width: 300px;
+      margin-bottom: 2rem; /* Ajout d'un espacement entre les colonnes en mode colonne */
+    }
+  
+    &__icon {
+      width: 100px;
+      border: 10px solid #00bc77;
+      border-radius: 50%;
+      padding: 1rem;
+    }
+  
+    &__title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+  
+    &__description {
+      font-size: 1rem;
+      color: #555;
+    }
+  
+    /* Responsiveness */
+    @media screen and (max-width: 768px) {
+      flex-direction: column; /* Passe les items en colonne */
+      align-items: center; /* Centre les items en colonne */
+      
+      &__item {
+        max-width: 90%; /* Réduit la largeur pour qu'elle s'adapte à l'écran */
+      }
+    }
+  }
+  
