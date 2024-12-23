@@ -1,0 +1,40 @@
+// src/components/Banner.scss
+.banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; 
+    background-color: #f9f9f9;
+  
+    &__image {
+      flex: 1;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    &__content {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #fff;
+      padding: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 300px;
+      text-align: left;
+    }
+  
+    &__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 0 1rem;
+      color: #2c3e50;
+    }
+  
+    &__description {
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+  
