@@ -1,13 +1,13 @@
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import SignIn from '../components/SignIn';
+import User from '../components/User';
 
 function App() {
   return (
     <>
       <Header />
-    <SignIn/>
+    <User/>
       <Footer />
       
     </>
