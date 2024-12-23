@@ -1,6 +1,6 @@
 
 import './Features.scss';
-import chatIcon from '../assets/images/icon-chat.png'; // Remplacez avec les bonnes images
+import chatIcon from '../assets/images/icon-chat.png'; 
 import moneyIcon from '../assets/images/icon-money.png';
 import shieldIcon from '../assets/images/icon-security.png';
 
