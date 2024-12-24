@@ -1,0 +1,27 @@
+.error-page {
+    text-align: center;
+    margin-top: 50px;
+    color: #2c3e50;
+  
+    &__title {
+      font-size: 6rem;
+      font-weight: bold;
+    }
+  
+    &__message {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+  
+    &__link {
+      font-size: 1rem;
+      color: #42b983;
+      text-decoration: none;
+      font-weight: bold;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
