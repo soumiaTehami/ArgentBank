@@ -1,80 +1,78 @@
 .main {
   background-color: #12002b;
-    padding: 2rem;
-  
-    .main-header {
-      text-align: center;
-      color: #fff;
-      margin-bottom: 2rem;
-  
-      h1 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-      }
-  
-      .edit-button {
-        background-color: #00bc77;
-        color: #fff;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-size: 1rem;
-        border-radius: 0%;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-  
-        &:hover {
-          background-color: #009e65;
-        }
-      }
-    }
-  
-    .account {
-      background: #fff;
-      border-radius: 5px;
+  padding: 2rem;
+
+  .main-header {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
       margin-bottom: 1rem;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  
-      &-content-wrapper {
-        &.cta {
-          .transaction-button {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 1rem;
-            border-color: #00bc77;
-            background-color: #00bc77;
-            color: #fff;
-            border-radius: 0%;
-            transition: background-color 0.3s ease;
-  
-            &:hover {
-              background-color: #009e65;
-            }
-          }
-        }
-  
-        .account-title {
-          font-size: 1.2rem;
-          margin: 0;
-        }
-  
-        .account-amount {
-          font-size: 1.5rem;
-          margin: 0.5rem 0;
-          color: #2c0233;
-        }
-  
-        .account-amount-description {
-          font-size: 0.9rem;
-          color: #555;
-        }
+    }
+
+    .edit-button {
+      background-color: #00bc77;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0%;
+      font-size: 1rem;
+
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #009e65;
       }
     }
   }
-  
+
+  .account {
+    background: #fff;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-content-wrapper {
+      &.cta {
+        .transaction-button {
+          display: block;
+          width: 100%;
+          padding: 8px;
+          font-size: 1.1rem;
+          font-weight: bold;
+          margin-top: 1rem;
+          border-color: #00bc77;
+          background-color: #00bc77;
+          color: #fff;
+          border-radius: 0%;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #009e65;
+          }
+        }
+      }
+
+      .account-title {
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .account-amount {
+        font-size: 2.5rem;
+        margin: 0.5rem 0;
+        color: #2c0233;
+      }
+
+      .account-amount-description {
+        font-size: 0.9rem;
+        color: #555;
+      }
+    }
+  }
+}

@@ -1,40 +1,47 @@
 .header {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 2rem;
+
+  &__nav {
     display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 20px;
-  
-    &__logo {
+    justify-content: space-between;
+    align-items: center;
+
+    &-items {
       display: flex;
-      align-items: center;
-  
-      img {
-        height: 40px;
-        margin-right: 10px; /* Espacement entre l'image et le texte */
-      }
-  
-      h1 {
-        font-size: 1.5rem;
-        color: #2c3e50;
-      }
-    }
-  
-    &__nav {
-      a {
-        text-decoration: none;
-        color: #2c3e50;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-  
-        i {
-          margin-right: 8px; /* Espacement entre l'icône et le texte */
-        }
-  
-        &:hover {
-          color: #42b983;
-        }
-      }
+      gap: 1rem;
     }
   }
-  
+
+  &__logo {
+    display: flex;
+    align-items: center;
+
+    &-image {
+      max-height: 50px;
+    }
+
+    h1 {
+      display: none; // Pour l'accessibilité (screen readers uniquement)
+    }
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #42b983;
+    }
+
+    i {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+  }
+}

@@ -1,12 +1,12 @@
 
-import Header from '../components/Header';
+import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import User from '../components/User';
 
 function App() {
   return (
     <>
-      <Header />
+      <NavBar />
     <User/>
       <Footer />
       
