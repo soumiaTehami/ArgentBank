@@ -6,7 +6,7 @@ function Profile() {
   return (
     <>
       <NavBar />
-    <User/>
+       <User/>
       <Footer />
       
     </>
