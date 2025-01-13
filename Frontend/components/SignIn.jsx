@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/authSlice";
+import { loginUser } from "./api"; // Import de la fonction API
 import "./SignIn.scss";
 
 const SignIn = () => {
@@ -15,7 +16,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Gestion des changements dans les champs
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -26,11 +26,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { username, password,rememberMe } = formData;
-    console.log(formData.username);
-
-    
+    const { username, password, rememberMe } = formData;
 
     if (!username || !password) {
       setErrorMessage("Please fill in both fields.");
@@ -38,25 +34,11 @@ const SignIn = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/v1/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email:username, password:password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Login failed");
-      }
-
-      const data = await response.json();
-      console.log("Response data:", data);
+      // Appel à la fonction API
+      const data = await loginUser(username, password);
 
       // Enregistrer le token dans Redux
       dispatch(login(data.body.token));
-      console.log('userconnected');
-      
-      
 
       // Stocker "Remember Me" dans localStorage si activé
       if (rememberMe) {
@@ -69,7 +51,6 @@ const SignIn = () => {
     }
   };
 
-  // Récupérer le username enregistré si "Remember Me" était activé
   useEffect(() => {
     const remembered = localStorage.getItem("rememberMe");
     if (remembered) {

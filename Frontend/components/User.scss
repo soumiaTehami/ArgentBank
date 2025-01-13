@@ -108,7 +108,7 @@
       }
 
       input {
-        width: 100%;
+        
         padding: 0.8rem;
         font-size: 1rem;
         border: 1px solid #ccc;
@@ -139,21 +139,18 @@
       transition: background-color 0.3s;
 
       &.save-button {
-        background-color: #3498db;
-        color: #fff;
-
-        &:hover {
-          background-color: #2980b9;
-        }
+        background-color:#fff;
+        color:#2980b9;
+        border: 2px solid #2980b9;
+        
       }
 
       &.cancel-button {
-        background-color: #e74c3c;
-        color: #fff;
+        background-color:#fff;
+        color:#2980b9;
+        border: 2px solid #2980b9;
 
-        &:hover {
-          background-color: #c0392b;
-        }
+      
       }
     }
   }

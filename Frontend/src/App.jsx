@@ -6,6 +6,7 @@ import Profile from "../pages/Profile/Profile";
 import Error from "../pages/Error/Error";
 import ProtectedRoute from "../components/ProtectedRoute";
 
+
 const App = () => {
   const token = useSelector((state) => state.auth.token);
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./User.scss";
 import Transaction from "./transaction";
+import { fetchUserProfile, updateUserProfile } from "./api";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -13,7 +14,7 @@ const User = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const getUserData = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
@@ -22,19 +23,7 @@ const User = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user profile");
-        }
-
-        const data = await response.json();
+        const data = await fetchUserProfile(token);
         setUserData(data.body);
         setFirstName(data.body.firstName);
         setLastName(data.body.lastName);
@@ -48,7 +37,7 @@ const User = () => {
       }
     };
 
-    fetchUserData();
+    getUserData();
   }, [navigate]);
 
   const toggleIsEdit = () => {
@@ -59,20 +48,7 @@ const User = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ firstName, lastName }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update user profile");
-      }
-
-      const updatedData = await response.json();
+      const updatedData = await updateUserProfile(token, firstName, lastName);
       setUserData(updatedData.body);
       setIsEdit(false); // Retour au mode vue
     } catch (err) {
@@ -94,7 +70,7 @@ const User = () => {
       <div className="main-header">
         {isEdit ? (
           <div className="edit-form">
-            <h1>Edit Profile</h1>
+            <h1>Welcome back</h1>
             <div className="form-group-container">
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>

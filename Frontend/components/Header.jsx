@@ -3,39 +3,27 @@ import { useEffect, useState } from "react";
 import "./Header.scss";
 import logo from "../assets/images/argentBankLogo.webp";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { fetchUserProfile } from "./api"; // Import de la fonction API
 
 const Header = () => {
   const [userName, setUserName] = useState(""); // État pour le nom de l'utilisateur
 
   useEffect(() => {
-    // Récupération des données utilisateur depuis le localStorage ou API
-    const fetchUserData = async () => {
+    const getUserData = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
         return; // Si pas de token, ne rien afficher
       }
 
       try {
-        const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch user profile");
-        }
-
-        const data = await response.json();
+        const data = await fetchUserProfile(token); // Appel à la fonction API
         setUserName(data.body.firstName); // Mettre à jour le nom de l'utilisateur
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
-    fetchUserData();
+    getUserData();
   }, []);
 
   const handleSignOut = () => {

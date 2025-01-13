@@ -1,18 +1,14 @@
-import  { createContext, useState } from "react";
+import { createContext, useState } from "react";
 
-// Créez le contexte
+// eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext();
 
-// Composant fournisseur
 // eslint-disable-next-line react/prop-types
 export const UserProvider = ({ children }) => {
-  const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
-  });
+  const [userName, setUserName] = useState("");
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ userName, setUserName }}>
       {children}
     </UserContext.Provider>
   );

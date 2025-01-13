@@ -2,6 +2,7 @@
 import Footer from '../../components/Footer';
 import User from '../../components/User';
 
+
 function Profile() {
   return (
     <>
