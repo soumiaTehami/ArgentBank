@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/authSlice";
-import { loginUser } from "./api"; // Import de la fonction API
+import { login } from "../../redux/authSlice";
+import { loginUser } from "../Api/api"; // Import de la fonction API
 import "./SignIn.scss";
 
 const SignIn = () => {

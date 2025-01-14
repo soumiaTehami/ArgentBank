@@ -1,6 +1,6 @@
 
 import './Banner.scss';
-import bannerImage from '../assets/images/bank-tree.webp'; 
+import bannerImage from '../../assets/images/bank-tree.webp'; 
 
 const Banner = () => {
     return (

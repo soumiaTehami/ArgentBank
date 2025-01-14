@@ -1,8 +1,8 @@
 
 import './Features.scss';
-import chatIcon from '../assets/images/icon-chat.png'; 
-import moneyIcon from '../assets/images/icon-money.png';
-import shieldIcon from '../assets/images/icon-security.png';
+import chatIcon from '../../assets/images/icon-chat.png'; 
+import moneyIcon from '../../assets/images/icon-money.png';
+import shieldIcon from '../../assets/images/icon-security.png';
 
 const Features = () => {
   return (

@@ -1,7 +1,7 @@
 
-import Footer from '../../components/Footer';
-import SignIn from '../../components/SignIn';
-import Header from '../../components/Header';
+import Footer from '../../components/Footer/Footer';
+import SignIn from '../../components/SignIn/SignIn';
+import Header from '../../components/Header/Header';
 
 function Profile() {
   return (

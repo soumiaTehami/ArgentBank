@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Header.scss";
-import logo from "../assets/images/argentBankLogo.webp";
+import logo from "../../assets/images/argentBankLogo.webp";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { fetchUserProfile } from "./api"; // Import de la fonction API
+import { fetchUserProfile } from "../Api/api"; // Import de la fonction API
 
 const Header = () => {
   const [userName, setUserName] = useState(""); // État pour le nom de l'utilisateur

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./User.scss";
-import Transaction from "./transaction";
-import { fetchUserProfile, updateUserProfile } from "./api";
+import Transaction from "../transaction/transaction";
+import { fetchUserProfile, updateUserProfile } from "../Api/api";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
