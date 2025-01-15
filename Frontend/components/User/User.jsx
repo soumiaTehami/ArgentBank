@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./User.scss";
 import Transaction from "../transaction/transaction";
 import { fetchUserProfile, updateUserProfile } from "../Api/api";
+import { UserContext } from "../UserContext"; // Import du contexte
 
 const User = () => {
-  const [userData, setUserData] = useState(null);
+  const { user, setUser } = useContext(UserContext); // Accès au contexte utilisateur
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isEdit, setIsEdit] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,9 +23,7 @@ const User = () => {
 
       try {
         const data = await fetchUserProfile(token);
-        setUserData(data.body);
-        setFirstName(data.body.firstName);
-        setLastName(data.body.lastName);
+        setUser(data.body); // Met à jour le contexte utilisateur
       } catch (err) {
         console.error(err);
         setError("Failed to fetch user profile. Please log in again.");
@@ -38,7 +35,7 @@ const User = () => {
     };
 
     getUserData();
-  }, [navigate]);
+  }, [navigate, setUser]);
 
   const toggleIsEdit = () => {
     setIsEdit(!isEdit);
@@ -48,8 +45,8 @@ const User = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const updatedData = await updateUserProfile(token, firstName, lastName);
-      setUserData(updatedData.body);
+      const updatedData = await updateUserProfile(token, user.firstName, user.lastName);
+      setUser(updatedData.body); // Met à jour le contexte utilisateur
       setIsEdit(false); // Retour au mode vue
     } catch (err) {
       console.error(err);
@@ -77,8 +74,8 @@ const User = () => {
                 <input
                   type="text"
                   id="firstName"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
+                  value={user.firstName}
+                  onChange={(e) => setUser({ ...user, firstName: e.target.value })}
                 />
               </div>
               <div className="form-group">
@@ -86,8 +83,8 @@ const User = () => {
                 <input
                   type="text"
                   id="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  value={user.lastName}
+                  onChange={(e) => setUser({ ...user, lastName: e.target.value })}
                 />
               </div>
             </div>
@@ -105,7 +102,7 @@ const User = () => {
             <h1>
               Welcome back
               <br />
-              {userData.firstName} {userData.lastName}!
+              {user.firstName} {user.lastName}!
             </h1>
             <button className="edit-button" onClick={toggleIsEdit}>
               Edit Name
