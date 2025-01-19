@@ -39,6 +39,8 @@ const SignIn = () => {
 
       // Enregistrer le token dans Redux
       dispatch(login(data.body.token));
+      
+      
 
       // Stocker "Remember Me" dans localStorage si activé
       if (rememberMe) {
