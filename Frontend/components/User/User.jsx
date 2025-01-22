@@ -1,30 +1,37 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import "./User.scss";
 import Transaction from "../transaction/transaction";
 import { fetchUserProfile, updateUserProfile } from "../Api/api";
+import { UpdateData } from "../../redux/authSlice"; // Import de l'action UpdateData
 
 const User = () => {
-  const [userData, setUserData] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Récupérer les données utilisateur depuis Redux
+  const { firstname, lastname, token } = useSelector((state) => state.auth);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [isEdit, setIsEdit] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const navigate = useNavigate();
+  const [firstName, setFirstName] = useState(firstname || ""); // Initialiser avec les données de Redux
+  const [lastName, setLastName] = useState(lastname || ""); // Initialiser avec les données de Redux
 
   useEffect(() => {
     const getUserData = async () => {
-      const token = localStorage.getItem("token");
-
       if (!token) {
         navigate("/sign-in");
         return;
       }
 
       try {
-        const data = await fetchUserProfile(token);
-        setUserData(data.body);
+        const data = await fetchUserProfile(token); // Récupérer les données du profil utilisateur
+        dispatch(UpdateData({
+          firstname: data.body.firstName,
+          lastname: data.body.lastName,
+        }));
         setFirstName(data.body.firstName);
         setLastName(data.body.lastName);
       } catch (err) {
@@ -38,19 +45,24 @@ const User = () => {
     };
 
     getUserData();
-  }, [navigate]);
+  }, [token, navigate, dispatch]);
 
   const toggleIsEdit = () => {
     setIsEdit(!isEdit);
   };
 
   const handleSave = async () => {
-    const token = localStorage.getItem("token");
-
     try {
+      // Appeler l'API pour mettre à jour les données
       const updatedData = await updateUserProfile(token, firstName, lastName);
-      setUserData(updatedData.body);
-      setIsEdit(false); // Retour au mode vue
+      
+      // Mettre à jour Redux avec les nouvelles données
+      dispatch(UpdateData({
+        firstname: updatedData.body.firstName,
+        lastname: updatedData.body.lastName,
+      }));
+
+      setIsEdit(false); // Revenir en mode lecture
     } catch (err) {
       console.error(err);
       setError("Failed to update user profile.");
@@ -70,7 +82,6 @@ const User = () => {
       <div className="main-header">
         {isEdit ? (
           <div className="edit-form">
-            
             <div className="form-group-container">
               <div className="form-group">
                 <label htmlFor="firstName">First Name</label>
@@ -105,7 +116,7 @@ const User = () => {
             <h1>
               Welcome back
               <br />
-              {userData.firstName} {userData.lastName}!
+              {firstname} {lastname}!
             </h1>
             <button className="edit-button" onClick={toggleIsEdit}>
               Edit Name
