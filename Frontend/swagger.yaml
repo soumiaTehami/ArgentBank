@@ -124,7 +124,7 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Fetch Transactions
+      summary: Get all transactions of this month
       description: Retrieve all transactions for the logged-in user
       parameters:
         - in: header
@@ -148,22 +148,23 @@ paths:
         '500':
           description: Internal server error
 
+  /transaction/{id}/:
     post:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Add a Transaction
-      description: Create a new transaction
+      summary: Show detail Transaction
+      description: Retrieve details for a specific transaction
       parameters:
-        - in: header
-          name: Authorization
-          description: Bearer JWT token
+        - in: path
+          name: id
+          description: Transaction ID
           required: true
           type: string
         - in: body
           name: body
-          description: New transaction payload
+          description: Transaction payload
           required: true
           schema:
             $ref: '#/definitions/Transaction'
@@ -177,48 +178,15 @@ paths:
         '500':
           description: Internal server error
 
-  /transaction/{id}:
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions Module
-      summary: Delete a Transaction
-      description: Delete a specific transaction by ID
-      parameters:
-        - in: header
-          name: Authorization
-          description: Bearer JWT token
-          required: true
-          type: string
-        - in: path
-          name: id
-          description: Transaction ID
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Transaction deleted successfully
-        '400':
-          description: Invalid request
-        '404':
-          description: Transaction not found
-        '500':
-          description: Internal server error
-
+  /transaction/{id}/categorie:
     put:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Update a Transaction
-      description: Update the category and/or notes of a specific transaction by ID
+      summary: Update transaction category
+      description: Update the category of a specific transaction
       parameters:
-        - in: header
-          name: Authorization
-          description: Bearer JWT token
-          required: true
-          type: string
         - in: path
           name: id
           description: Transaction ID
@@ -226,26 +194,57 @@ paths:
           type: string
         - in: body
           name: body
-          description: Transaction update payload (category and/or notes)
+          description: Payload for updating the category
           required: true
           schema:
             type: object
             properties:
               category:
                 type: string
-                description: Updated transaction category
-                example: "Entertainment"
-              notes:
-                type: string
-                description: Updated notes for the transaction
-                example: "Bought movie tickets"
+                example: "Food"
       produces:
         - application/json
       responses:
         '200':
           description: Transaction updated successfully
         '400':
-          description: Invalid fields
+          description: Invalid request
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal server error
+
+  /transaction/{id}/notes:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Update transaction notes
+      description: Update notes for a specific transaction
+      parameters:
+        - in: path
+          name: id
+          description: Transaction ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Payload for updating notes
+          required: true
+          schema:
+            type: object
+            properties:
+              notes:
+                type: string
+                example: "Paid for groceries"
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Notes updated successfully
+        '400':
+          description: Invalid request
         '404':
           description: Transaction not found
         '500':
@@ -274,6 +273,19 @@ definitions:
         type: string
         description: User last name
 
+  UserProfile:
+    type: object
+    properties:
+      firstName:
+        type: string
+        description: Updated user first name
+      lastName:
+        type: string
+        description: Updated user last name
+      email:
+        type: string
+        description: Updated user email
+
   Login:
     type: object
     properties:
@@ -289,6 +301,7 @@ definitions:
     properties:
       token:
         type: string
+        description: JWT token for authentication
 
   ApiResponse:
     type: object
@@ -322,8 +335,8 @@ definitions:
       category:
         type: string
         description: Transaction category
-        example: "Food"  # Example category
+        example: "Food"
       notes:
         type: string
         description: Additional notes
-        example: "Paid for groceries"  # Example note
+        example: "Paid for groceries"
